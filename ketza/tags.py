@@ -3,18 +3,19 @@ from typing import Union
 # The base piece of functionality... currying is the answer!
 # Let's take a look at how this works...
 
+def _stringify_attrs(attributes: dict) -> str:
+    return ''.join([f' {attr}="{val}"' for attr, val in attributes.items()])
+
 def tag(name: str):
 
     #Here, we make (and return) a function to add attributes for our tag
-    def add_attrs(attributes: dict):
-        
-        attributes_str = ' '.join(
-                [f'{attr}="{val}"' for attr, val in attributes.items()]
-        )
-        
+    def add_attrs(attributes: dict = {}):
+
+        attrs_str = _stringify_attrs(attributes)
+
         #Here we, in turn, make and return a function to put in the content!
         def add_content(content: str):
-            return f"<{name} {attributes_str}>\n\t{content}\n</{name}>"
+            return f"<{name}{attrs_str}>\n\t{content}\n</{name}>"
         
         return add_content
 
