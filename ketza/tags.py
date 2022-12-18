@@ -11,12 +11,13 @@ def tag(name: str):
         attrs_str = _stringify_attrs(attributes)
 
         #Here we, in turn, make and return a function to put in the content!
-        def add_content(content: Optional[str] = None):
-            if content is not None:
-                return f"<{name}{attrs_str}>\n\t{content}\n</{name}>"
-            else:
+        def add_content(*content: Optional[str]):
+            if len(content) == 0:
                 return f"<{name}{attrs_str} />"
+            
+            content = '\n'.join(content)
 
+            return f"<{name}{attrs_str}>\n\t{content}\n</{name}>"
         return add_content
 
     return add_attrs
