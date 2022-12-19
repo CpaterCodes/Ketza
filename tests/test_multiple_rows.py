@@ -2,7 +2,7 @@ import pytest
 from ..ketza import ul, li
 
 def test_multiple_contents():
-    intent ="<ul>\n<li>\nFoo\n</li>\n<li>\nBar\n</li>\n</ul>"
+    intent ="<ul><li>Foo</li><li>Bar</li></ul>"
 
     attempt = ul()(
             li()('Foo'),

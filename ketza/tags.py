@@ -15,9 +15,9 @@ def tag(name: str):
             if len(content) == 0:
                 return f"<{name}{attrs_str} />"
             
-            content = '\n'.join(content)
+            content = ''.join(content)
 
-            return f"<{name}{attrs_str}>\n{content}\n</{name}>"
+            return f"<{name}{attrs_str}>{content}</{name}>"
         return add_content
 
     return add_attrs
