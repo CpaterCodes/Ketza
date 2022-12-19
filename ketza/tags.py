@@ -28,12 +28,14 @@ def _stringify_attrs(attributes: dict) -> str:
 # For convenience, let's also predefine some common tags
 # Examples of their use can be found under tests/, but docs are to come!!
 
+a = tag('a')
 article = tag('article')
+body = tag('body')
 div = tag('div')
 h1 = tag('h1')
+li = tag('li')
 main = tag('main')
 p = tag('p')
 section = tag('section')
-a = tag('a')
 ul = tag('ul')
-li = tag('li')
+
