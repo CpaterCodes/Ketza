@@ -11,20 +11,22 @@ def indent(
 
     # Add indents, starting by getting full rows
     rows = raw_html.split('\n')
-    indented_rows = []
+    indented_rows = [''] * len(rows)
     depth: int = 0
     tab = '\t' if indenter == 'tabs' else "    "
-    for row in rows:
+    for i in range(len(rows)):
+        row = rows[i]
+
         if _is_closing_tag(row):
             depth -= 1
-            indented_rows.append(f"{tab * depth}{row}\n")
+            indented_rows[i] = f"{tab * depth}{row}\n"
 
         elif _is_opening_tag(row):
-            indented_rows.append(f"{tab * depth}{row}\n")
+            indented_rows[i] = f"{tab * depth}{row}\n"
             depth += 1
 
         else:
-            indented_rows.append(f"{tab * depth}{row}\n")
+            indented_rows[i] = f"{tab * depth}{row}\n"
 
 
     return ''.join(indented_rows[:-1])
