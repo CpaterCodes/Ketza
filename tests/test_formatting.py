@@ -2,19 +2,17 @@ import pytest
 from ..ketza.format import indent, linebreaks
 
 def test_linebreaks():
-    linebroken_html: str
-    with open("tests/linebreaks_sample.html", "r") as f:
-        linebroken_html = f.read()
-
-    unbroken_html = '<body id="App"><p>Hello</p><p>World</p></body>'
+    linebroken_html = '<body id="A">\n<p>\n1\n</p>\n<p>\n2\n</p>\n</body>\n'
+    unbroken_html = '<body id="A"><p>1</p><p>2</p></body>'
     assert linebreaks(unbroken_html) == linebroken_html
 
 
 def test_indent():
-    indented_html: str
-    with open("tests/indent_sample.html", "r") as f:
-        indented_html = f.read()
-    
-    unindented_html = '<body id="App"><p>Hello</p><p>World</p></body>'
+    indented_html = '<p>\n'
+    indented_html += ''.join(
+            [ f'\t<s>\n\t\t{n}\n\t</s>\n' for n in ['1', '2'] ]
+    )
+    indented_html += '</p>\n'
+    unindented_html = '<p><s>1</s><s>2</s></p>'
     assert indent(unindented_html) == indented_html
 
