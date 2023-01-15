@@ -1,0 +1,32 @@
+[build-system]
+requires = ['setuptools>=61.0.0', 'wheel']
+build-backend = 'setuptools.build_meta'
+
+[project]
+name = 'ketza'
+version = '1.0.0'
+requires-python = '>=3.6'
+description = 'A python engine for building html components'
+readme = 'README.md'
+authors = [
+{ name = 'Charlie Paterson', email = 'Charlieed.paterson@googlemail.com' }
+]
+license = { file = "LICENSE" }
+classifiers = [
+	"License :: OSI Approved :: MIT License",
+	"Development Status :: 5 - Production/Stable",
+	"Operating System :: OS Independent"
+]
+keywords = [
+	'html',
+	'ketza',
+	'web',
+	'full stack'
+]
+
+[project.urls]
+Homepage = "https://github.com/CpaterCodes/Ketza"
+
+[project.optional-dependencies]
+dev = ["pipenv", "pytest"]
+
