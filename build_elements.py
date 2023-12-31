@@ -26,14 +26,11 @@ def retrieve_tag_names(w3c_soup: BeautifulSoup) -> list[str]:
 
 def clean_tag_names(tag_names: list[str]) -> list[str]:
     """
-    Required as 'del' is already reserved in python.
+    Filtering out 'del' as it is already reserved in python.
     Other reserved keywords shall also be replaced once made apparent.
     """
-
-    return [ 
-        "delete" if tag_name == "del" else tag_name 
-        for tag_name in tag_names
-    ]
+    reserved = ('del')
+    return [tag_name for tag_name in tag_names if tag_name not in reserved]
 
 
 def write_tag_functions(tag_names: list[str]):
