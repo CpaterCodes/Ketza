@@ -9,10 +9,11 @@ name = "pypi"
 pytest = "*"
 twine = "*"
 beautifulsoup4 = "*"
+httpx = "*"
 
 [requires]
 python_version = "3.11"
 
 [scripts]
 build = "python3 build_elements.py"
-
+fetch = "python3 fetch_standard.py"
