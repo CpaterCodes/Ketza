@@ -1,22 +1,45 @@
-# Ketza
-## HTML defined in python!
+# Ketza - HTML defined in python
 
----
+### Contents
+
+- [Rationale](#rationale)
+- [Basics](#basics) 
+- [Example with an unordered list](#example-with-an-unordered-list)
+- [Formatting](#formatting)
+- [Future Intentions](#future-intentions)
 
 ## Rationale
 
-With this project I want to create a toolset for defining reusable pieces
-of html; I'm looking to build something centered around doing so at the 
-component level rather than the page level, providing an alternative to html
-templating engines.
+This project provides a framework for defining reusable units of HTML in
+python code, as opposed to being a runtime or a templating engine.
 
-Despite this, I also want to preserve simplicity and flexibility such that
-users can find useful and creative ways to integrate ketza with whichever 
-other tools they need or desire to.
+My intention is to provide a powerful but simple interface, allowing for 
+extensibility and interplay with other technologies without too many 
+headaches.
 
-## A brief illustration with an unordered list
+## Basics
 
-Let's say, for argument's sake, I would like to define a list like tnis:
+At the core of Ketza is the `tag` function, which allows you to build a 
+html element in a series of function calls as follows:
+```python
+from ketza import tag
+
+main = tag("main") # Apply element name
+
+app = main({"id": "app"}) # Apply attributes as key-value pairs
+
+hello_world = app("Hello World!") # Apply inner string content
+
+# hello_world is now equal to `<main id="app">Hello World!</main>`
+```
+
+However, Ketza also aims to provide pre-defined named tags for recognised 
+HTML elements.
+A further example is presented below, making use of predefined tags.
+
+## Example with an unordered list
+
+Let's say, for argument's sake, I would like to define a list like this:
 ```html
 <ul id="list-of-three">
     <li class="list-triplet">
@@ -48,14 +71,9 @@ list_of_three = ul({"id": "list-of-three"})(
 )
 ```
 
-However, notice we're still repeating ourselves a bunch!
-But fret not, this is where the ability to define components in python
-rather than raw html comes in:
-
+However, we can simplify this even further:
 ```python
 from ketza import ul, li
-
-# Watch! This actually creates a function which will wrap content in a <li>
 
 triplet = li({"class": "list-triplet"})
 
@@ -64,20 +82,57 @@ list_of_three = ul({"id": "list-of-three"})(
     triplet("Bar"),
     triplet("Baz")
 )
-
-# As you can see, this gives us some power to build reuseable components!
-
 ```
 
-## A quick note to end
+For our purposes, this yields html which is functionally equivalent to our
+intended `list-of-three`. Even so, the raw html will look more like this:
 
-This readme page is, needless to say, far from comprehensive.
-It is my hope to flesh it out and add more examples of what Ketza can do 
-especially as I continue to improve it.
+```html
+<ul id="list-of-three"><li class="list-triplet">Foo</li><li class=.... 
+```
 
-Users should also be warned that while the output of ketza functionality
-should function the same as the example html, the amount of indentation will
-differ as of the time of writing.
+While this does essentially result in pre-minified HTML output, there are 
+situations which call for human-readable raw HTML. As such, the following
+section shall briefly touch on formatting.
 
-I am hoping to further elaborate on giving the option to indent or not, as 
-well as including the proper number of tabs (or spaces?) in the output.
+## Formatting
+
+Ketza provides a utility function for indenting minified html:
+```python
+from ketza.formatters import indent 
+
+list_of_three = indent(list_of_three)
+```
+
+As seen, the `indent` function turns this:
+```html
+<ul id="list-of-three"><li class="list-triplet">Foo</li><li class=.... 
+```
+
+Into this:
+```html
+<ul id="list-of-three">
+    <li class="list-triplet">
+        Foo
+    </li>
+    <li class="list-triplet">
+        Bar
+    </li>
+    <li class="list-triplet">
+        Baz
+    </li>
+</ul>
+```
+
+## Future Intentions
+
+My current hope for the project is to update the metaprogramming solution
+for defining recognised HTML tags to make use of the WHATWG living standard.
+
+In turn, though I am confident that Ketza provides the means to define 
+components representing common HTML boilerplate, I am also considering
+defining utilities to further streamline HTML boilerplate creation.
+
+I am also open to feedback for how I can improve and 
+extend Ketza, as well as its interoperability with other web technologies.
+
