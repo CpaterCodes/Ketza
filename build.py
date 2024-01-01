@@ -6,36 +6,29 @@ def uniq(collection: list):
     return list(dict.fromkeys(collection).keys())
 
 
-def load_html() -> str:
-    """ 
-    Load the W3C HTML5 reference document.
-    Aborts script if this fails.
-    """
-    with open("W3C_HTML5_Elements.html", "r") as w3c_html_file:
-        return w3c_html_file.read()
+def load_html_standard() -> str:
+    
+    # Load the HTML5 reference document.
+    with open("HTML5_Elements.html", "r") as html_standard:
+        return html_standard.read()
 
 
-def retrieve_tag_names(w3c_soup: BeautifulSoup) -> list[str]:
-    """ 
-    Extract the set of all tags from the document, removing duplicates.
-    """
-    tags = uniq(w3c_soup.find_all("span", "element"))
+def retrieve_tag_names(standard_soup: BeautifulSoup) -> list[str]:
+    # Extract the set of all tags from the document, removing duplicates.
+    tags = uniq(standard_soup.find_all("span", "element"))
     
     return [tag.string for tag in tags]
 
 
 def clean_tag_names(tag_names: list[str]) -> list[str]:
-    """
-    Filtering out 'del' as it is already reserved in python.
-    Other reserved keywords shall also be replaced once made apparent.
-    """
-    reserved = ('del')
+    # Filtering out 'del' and 'object' as these are reserved in python.
+    reserved = ("del", "object")
     return [tag_name for tag_name in tag_names if tag_name not in reserved]
 
 
 def write_tag_functions(tag_names: list[str]):
     
-    # Declare tag_name = tag('tag_name') for every W3C HTML5 tag
+    # Declare tag_name = tag('tag_name') for every HTML5 tag
     tag_funcs = [
         f"{tag_name} = tag('{tag_name}')\n" for tag_name in tag_names
     ]
@@ -52,9 +45,9 @@ def write_tag_functions(tag_names: list[str]):
 
 def main():
     
-    w3c_document = load_html() 
-    w3c_soup = BeautifulSoup(w3c_document, "html.parser")
-    tag_names = retrieve_tag_names(w3c_soup)
+    standard_document = load_html_standard() 
+    standard_soup = BeautifulSoup(standard_document, "html.parser")
+    tag_names = retrieve_tag_names(standard_soup)
     write_tag_functions(
         clean_tag_names(
             tag_names
