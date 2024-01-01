@@ -10,6 +10,7 @@ pytest = "*"
 twine = "*"
 beautifulsoup4 = "*"
 httpx = "*"
+build = "*"
 
 [requires]
 python_version = "3.11"

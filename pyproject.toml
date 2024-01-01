@@ -4,7 +4,7 @@ build-backend = 'setuptools.build_meta'
 
 [project]
 name = 'ketza'
-version = '1.0.0'
+version = '2.0.0'
 requires-python = '>=3.6'
 description = 'A python engine for building html components'
 readme = 'README.md'
