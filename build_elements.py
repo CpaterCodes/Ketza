@@ -1,5 +1,6 @@
 from bs4 import BeautifulSoup
 import logging
+import re
 
 
 def uniq(collection: list):
@@ -9,19 +10,21 @@ def uniq(collection: list):
 def load_html_standard() -> str:
     
     # Load the HTML5 reference document.
-    with open("HTML5_Elements.html", "r") as html_standard:
+    with open("HTML_living_standard.html", "r") as html_standard:
         return html_standard.read()
 
 
 def retrieve_tag_names(standard_soup: BeautifulSoup) -> list[str]:
     # Extract the set of all tags from the document, removing duplicates.
-    tags = uniq(standard_soup.find_all("span", "element"))
+    tags = uniq(
+        standard_soup.find_all(href=re.compile("the-.*-element"))
+    )
     
     return [tag.string for tag in tags]
 
 
 def clean_tag_names(tag_names: list[str]) -> list[str]:
-    # Filtering out 'del' and 'object' as these are reserved in python.
+    # Filtering out keywords which are reserved in python.
     reserved = ("del", "object")
     return [tag_name for tag_name in tag_names if tag_name not in reserved]
 
