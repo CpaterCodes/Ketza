@@ -14,8 +14,7 @@ This project provides a framework for defining reusable units of HTML in
 python code, as opposed to being a runtime or a templating engine.
 
 My intention is to provide a powerful but simple interface, allowing for 
-extensibility and interplay with other technologies without too many 
-headaches.
+extensibility and interplay with other technologies without headaches.
 
 ## Basics
 
@@ -34,7 +33,7 @@ hello_world = app("Hello World!") # Apply inner string content
 ```
 
 However, Ketza also aims to provide pre-defined named tags for recognised 
-HTML elements.
+HTML elements based on the WHATWG living standard.
 A further example is presented below, making use of predefined tags.
 
 ## Example with an unordered list
@@ -104,12 +103,12 @@ from ketza.formatters import indent
 list_of_three = indent(list_of_three)
 ```
 
-As seen, the `indent` function turns this:
+The `indent` function turns this:
 ```html
 <ul id="list-of-three"><li class="list-triplet">Foo</li><li class=.... 
 ```
 
-Into this:
+Into this!
 ```html
 <ul id="list-of-three">
     <li class="list-triplet">
@@ -126,10 +125,7 @@ Into this:
 
 ## Future Intentions
 
-My current hope for the project is to update the metaprogramming solution
-for defining recognised HTML tags to make use of the WHATWG living standard.
-
-In turn, though I am confident that Ketza provides the means to define 
+Though I am confident that Ketza provides the means to define 
 components representing common HTML boilerplate, I am also considering
 defining utilities to further streamline HTML boilerplate creation.
 
