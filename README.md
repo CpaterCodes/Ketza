@@ -32,7 +32,7 @@ hello_world = app("Hello World!") # Apply inner string content
 # hello_world is now equal to `<main id="app">Hello World!</main>`
 ```
 
-However, Ketza also aims to provide pre-defined named tags for recognised 
+However, Ketza also provides pre-defined named tags for recognised 
 HTML elements based on the WHATWG living standard.
 A further example is presented below, making use of predefined tags.
 
